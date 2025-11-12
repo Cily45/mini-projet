@@ -3,6 +3,7 @@ import { Teacher } from './Teacher'
 import { Student } from './Student'
 import { SchoolCourse } from './SchoolCourse'
 
+
 const teachers: Teacher[] = []
 const students: Student[] = []
 const enrollments: Enrollment[] = []
@@ -35,4 +36,43 @@ courses.forEach(course => {
   }
 })
 
-console.log(courses[0].prettyPrint())
+for (let i = 0; i < 5; i++) {
+  const student = students[Math.floor(Math.random() * students.length)]
+  const course = courses[Math.floor(Math.random() * courses.length)]
+
+  enrollments.push({
+    student: student,
+    course: course,
+    status: 'failed'
+  })
+}
+
+for (let i = 0; i < 25; i++) {
+  const student = students[Math.floor(Math.random() * students.length)]
+  const course = courses[Math.floor(Math.random() * courses.length)]
+
+  enrollments.push({
+    student: student,
+    course: course,
+    status: 'active'
+  })
+}
+
+for (let i = 0; i < 5; i++) {
+  const student = students[Math.floor(Math.random() * students.length)]
+  const course = courses[Math.floor(Math.random() * courses.length)]
+
+  enrollments.push({
+    student: student,
+    course: course,
+    status: 'completed'
+  })
+}
+
+
+const prettyPrint = (course: SchoolCourse) => {
+  const line = '-'.repeat(20)
+  return `${line}\nCours: ${course.title}\nProfesseur: ${course.teacher.getFullName()}\nEtudiants: ${course.students.length}\nMoyenne générale: ${course.averageGrade()}\n${line}\n`
+}
+
+console.log(prettyPrint(courses[3]))
